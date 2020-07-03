@@ -9,6 +9,12 @@ public class BuildingController : MonoBehaviour
     public Camera cam;
 
     public float greenX, greenZ;
+    public float mapSpace;
+    public float MapSpaceLeft;
+    public float[] TakenPlaces;
+
+    public int PlacesArray;
+    public int i;
 
     public GameObject map;
     public GameObject SpawnableObj;
@@ -22,10 +28,14 @@ public class BuildingController : MonoBehaviour
     public bool SpawnedRedAlready;
     public bool SpawnableObjOn;
 
+
     // Start is called before the first frame update
     void Start()
     {
-
+        mapSpace = (map.transform.localScale.x-1) * (map.transform.localScale.z-1); /// maths.....I know The problem
+        MapSpaceLeft = mapSpace;
+        PlacesArray = Mathf.RoundToInt((float)mapSpace);
+        TakenPlaces = new float[PlacesArray];
     }
 
     // Update is called once per frame
@@ -35,7 +45,7 @@ public class BuildingController : MonoBehaviour
         greenZ = Mathf.Round(hit.point.z);
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-      
+        
       
 
 
@@ -46,11 +56,22 @@ public class BuildingController : MonoBehaviour
             if (hit.point.x <= map.transform.localScale.x && hit.point.z <= map.transform.localScale.z && hit.point.x >= -map.transform.localScale.x && hit.point.z >= -map.transform.localScale.z)
             {
                 RedMapCheck = false;
-
+                for (i = 0; i < PlacesArray;)
+                {
+                    TakenPlaces[i] = i + 1;
+                    
+                }
+                if (TakenPlaces.Length!= greenX)
+                {
+                    Debug.Log("You can place");
+                }else
+                {
+                    Debug.Log("already taken");
+                }
                 if (RedMapCheck == false)
                 {
                     SpawnedRedAlready = false;
-                    Debug.Log("im In");
+                    ///Debug.Log("im In");
                     Destroy(redClone);
 
                     
@@ -73,7 +94,7 @@ public class BuildingController : MonoBehaviour
             {
                 RedMapCheck = true;
             SpawnedGreenAlready = false;
-                Debug.Log("im out");
+                ///Debug.Log("im out");
             
             Destroy(greenClone);
             if (SpawnedRedAlready == false)
@@ -84,7 +105,7 @@ public class BuildingController : MonoBehaviour
             {
                 ///redClone.transform.position = new Vector3(Input.mousePosition.x, 0, Input.mousePosition.z);
               
-                Debug.Log("im out");
+                ///Debug.Log("im out");
             }
         }
         }
@@ -100,6 +121,8 @@ public class BuildingController : MonoBehaviour
         {
            GameObject gmobj = Instantiate(SpawnableObj, new Vector3(greenX, 1, greenZ), Quaternion.identity);
             SpawnableObjOn = true;
+            i++;
+            MapSpaceLeft--;
         }
     }
         void RedBoxChecked()
