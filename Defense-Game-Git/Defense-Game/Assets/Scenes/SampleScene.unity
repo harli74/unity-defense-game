@@ -424,8 +424,17 @@ MonoBehaviour:
   greenX: 0
   greenZ: 0
   map: {fileID: 902718107}
-  greenBox: {fileID: 0}
-  redBox: {fileID: 0}
+  SpawnableObj: {fileID: 6316965114474760748, guid: 04dd8ecc4ee6f954b92335f03e893803,
+    type: 3}
+  greenBox: {fileID: 2039131735608129957, guid: 9a850ce35d725704fb7751d59f609a3f,
+    type: 3}
+  greenClone: {fileID: 0}
+  redBox: {fileID: 2260300544159506923, guid: be5be94f4699f2d4a9c242639d8eede9, type: 3}
+  redClone: {fileID: 0}
+  RedMapCheck: 0
+  SpawnedGreenAlready: 0
+  SpawnedRedAlready: 0
+  SpawnableObjOn: 0
 --- !u!1 &2138677391
 GameObject:
   m_ObjectHideFlags: 0
